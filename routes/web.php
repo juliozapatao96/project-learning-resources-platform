@@ -17,6 +17,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    // para probar DBsMigrations
+    // return \App\Models\Resource::with('category')->get();
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),

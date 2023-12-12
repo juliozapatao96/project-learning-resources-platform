@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
         return [
             // Es una clase de ayuda para el modo de desarrollo para crear datos falsos
             // It is a helper class for develepment mode to create fake data
-            'name' => $this->faker->word;
+            'name' => $this->faker->word,
         ];
     }
 }
