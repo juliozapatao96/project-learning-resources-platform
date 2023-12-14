@@ -69,19 +69,21 @@ onMounted(() => {
             </div>
 
             <div class="relative overflow-x-auto">
-                <table>
-                    <thead>
+                <table class="w-full-text-sm text-left text-gray-500">
+                    <thead class="text-lg text-gray-700 uppercase bg-gray-500"  >
                         <tr>
-                            <th>Recurso</th>
-                            <th>Link</th>
-                            <th>Categoria</th>
+                            <th scope="col" class="p-4">Recurso</th>
+                            <th scope="col" class="p-4">Link</th>
+                            <th scope="col" class="p-4">Categoria</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="bg-white">
                         <tr v-for="resource in resources" :key="resource.id">
-                            <th>{{ resource.title }}</th>
-                            <th>{{ resource.link }}</th>
-                            <th>{{ resource.category.name }}</th>
+                            <th scope="row" class="p-3">{{ resource.title }}</th>
+                            <th scope="row" class="p-3">
+                                <a target="_blank" href="resource.link">Ver recurso</a>
+                            </th>
+                            <th scope="row" class="p-3">{{ resource.category.name }}</th>
                         </tr>
                     </tbody>
                 </table>
