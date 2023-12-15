@@ -5,10 +5,15 @@ let description = ref("");
 let link = ref("");
 
 function createResource(){
-    console.log("Creando recurso");
-    console.log(title.value);
-    console.log(description.value);
-    console.log(link.value);
+    axios
+        .post("/api/resources", {
+            title: title.value,
+            description: description.value,
+            link: link.value,
+        })
+        .then((response) => {
+            console.log(response);
+        });
 }
 
 </script>
