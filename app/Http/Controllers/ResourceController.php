@@ -16,17 +16,19 @@ class ResourceController extends Controller
         return Inertia::render('Resources', [ // Busca la vista de Inertia Resources para renderizarlo
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'resources' => Resource::with('category')->get(), // realiza una consulta Eloquent para obtener todos los recursos con sus relaciones de categoría cargadas.
+            'resources' => Resource::with('category')->latest()->get(), // realiza una consulta Eloquent para obtener todos los recursos con sus relaciones de categoría cargadas.
         ]);
     }
 
     public function store(Request $request){
         // dd(Category::first());
+        // dd($request->all());
         Resource::create([
             'title' => $request->title,
             'link' => $request->link,
             'description' => $request->description,
-            'category_id' => Category::first()->id,
+            // 'category_id' => Category::first()->id,
+            'category_id' => $request->category_id,
             'creator_id' => $request->user()->id,
         ]);
 
