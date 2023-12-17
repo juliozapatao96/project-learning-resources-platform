@@ -32,4 +32,12 @@ class ResourceController extends Controller
 
         // return to_route('Resources');
     }
+
+    public function search(Request $request){
+        // dd($request->all());
+        return Resource::where('title', 'like', "%$request->search%")
+            ->orWhere('description', 'like', "%$request->search%")
+            ->with('category')
+            ->get();
+    }
 }
