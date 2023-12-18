@@ -1,8 +1,18 @@
 <script setup >
-import { ref } from "vue";
+import { ref, onMounted} from "vue";
+import axios from "axios";
+
+let categories = ref([]);
 let title = ref("");
 let description = ref("");
 let link = ref("");
+let category_id = ref(null);
+
+onMounted(() => {
+    axios.get("api/categories").then((response) => {
+        categories.value = response.data;
+    });
+});
 
 function createResource(){
     axios
@@ -10,10 +20,16 @@ function createResource(){
             title: title.value,
             description: description.value,
             link: link.value,
+            category_id: category_id.value,
         })
         .then((response) => {
-            console.log(response);
-        });
+            // console.log(response);
+            window.location.href = "/";
+        }).catch((error) => {
+            // Se puede manejar el error en este espacio, mostrando algo al user
+            alert(error.message);
+        })
+        ;
 }
 
 </script>
@@ -24,6 +40,11 @@ function createResource(){
         <input type="text" v-model="title">
         <input type="text" v-model="description">
         <input type="text" v-model="link">
+        <select v-model="category_id">
+            <option v-for="category in categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+            </option>
+        </select>
         <button @click="createResource">Ingresar recurso</button>
     </div>
 </template>
