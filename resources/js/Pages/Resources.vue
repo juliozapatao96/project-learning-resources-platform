@@ -22,10 +22,19 @@ const props = defineProps({
 
 let search =ref("");
 let filteredResources = ref([]);
+let filteredCategory = ref(null);
 
 watch(search, (value) => {
     // console.log(value);
     axios.get("/api/resources?search=" + value).then((response) => {
+        // console.log(response.data, "Resultados de la búsqueda") 
+        filteredResources.value = response.data;
+    });
+});
+
+watch(filteredCategory, (value) => {
+    // console.log(value);
+    axios.get("/api/resources?category=" + value).then((response) => {
         // console.log(response.data, "Resultados de la búsqueda") 
         filteredResources.value = response.data;
     });
@@ -88,7 +97,7 @@ onMounted(() => {
             <div class="relative overflow-x-auto">
                 <div>
                     <input type="text" placeholder="Buscar..." v-model="search">
-                    <select v-model="category_id">
+                    <select v-model="filteredCategory">
                         <option v-for="category in categories" :key="category.id" :value="category.id">
                             {{ category.name }}
                         </option>
