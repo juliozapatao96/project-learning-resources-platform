@@ -14,18 +14,34 @@ const props = defineProps({
     resources: {
         type: Array,
     },
+    categories: {
+        type: Array,
+    },
 
 });
 
 let search =ref("");
 let filteredResources = ref([]);
+let filteredCategory = ref(0);
 
 watch(search, (value) => {
     // console.log(value);
-    axios.get("/api/resources?search=" + value).then((response) => {
+    axios
+        .get("/api/resources?search=" + value+"&category="+filteredCategory.value)
+        .then((response) => {
+            // console.log(response.data, "Resultados de la búsqueda") 
+            filteredResources.value = response.data;
+        });
+});
+
+watch(filteredCategory, (value) => {
+    // console.log(value);
+    axios
+    .get("/api/resources?category=" + value+"&search="+search.value)
+    .then((response) => {
         // console.log(response.data, "Resultados de la búsqueda") 
         filteredResources.value = response.data;
-    });
+    }); 
 });
 
 onMounted(() => {
@@ -83,7 +99,15 @@ onMounted(() => {
             </div>
 
             <div class="relative overflow-x-auto">
-                <input type="text" placeholder="Buscar..." v-model="search">
+                <div>
+                    <input type="text" placeholder="Buscar..." v-model="search">
+                    <select v-model="filteredCategory">
+                        <option value=0>Todas las categorías</option>
+                        <option v-for="category in categories" :key="category.id" :value="category.id">
+                            {{ category.name }}
+                        </option>
+                    </select>
+                </div>
                 <table class="w-full-text-sm text-left text-gray-500">
                     <thead class="text-lg text-gray-700 uppercase bg-gray-500"  >
                         <tr>
