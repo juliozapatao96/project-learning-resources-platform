@@ -40,8 +40,8 @@ class ResourceController extends Controller
         // dd($request->all());
         return Resource::query()
             ->when(!empty($request->search), function ($query) use ($request){
-                return $query->where('title', 'like', "%$request->search%")
-                ->orWhere('description', 'like', "%$request->search%");
+                return $query->where('title', 'like', "%$request->search%");
+                //->orWhere('description', 'like', "%$request->search%");
             })
             ->when(!empty($request->category), function ($query) use ($request){
                 return $query->where('category_id', $request->category);
