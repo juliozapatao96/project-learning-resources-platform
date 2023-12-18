@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use \App\Models\Resource;
+use App\Models\Resource;
 use App\Models\Category;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +17,7 @@ class ResourceController extends Controller
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'resources' => Resource::with('category')->latest()->get(), // realiza una consulta Eloquent para obtener todos los recursos con sus relaciones de categoría cargadas.
+            'categories' => Category::all(),
         ]);
     }
 
