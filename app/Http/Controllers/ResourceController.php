@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Resource;
 use App\Models\Category;
+use App\Models\Voter;
+
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,7 @@ class ResourceController extends Controller
             'canRegister' => Route::has('register'),
             'resources' => Resource::with('category', 'votes')->latest()->get(), // realiza una consulta Eloquent para obtener todos los recursos con sus relaciones de categoría cargadas.
             'categories' => Category::all(),
+            'voterId' => Voter::getOrCreateVoter($request)->code,
         ]);
     }
 
