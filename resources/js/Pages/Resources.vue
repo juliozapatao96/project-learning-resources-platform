@@ -117,8 +117,14 @@ onMounted(() => {
 
             <div class="relative overflow-x-auto">
                 <div>
-                    <input type="text" placeholder="Buscar..." v-model="search">
-                    <select v-model="filteredCategory">
+                    <input 
+                        type="text" 
+                        placeholder="Buscar..." 
+                        class="w-60 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
+                        v-model="search">
+                    <select 
+                        class="w-60 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
+                        v-model="filteredCategory">
                         <option value=0>Todas las categorías</option>
                         <option v-for="category in categories" :key="category.id" :value="category.id">
                             {{ category.name }}
