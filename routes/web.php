@@ -11,6 +11,7 @@ use App\Models\Resource;
 
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\VoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +45,5 @@ require __DIR__.'/auth.php';
 Route::get('/api/resources', [ResourceController::class, 'search']);
 
 Route::middleware('auth')->post('api/resources', [ResourceController::class,'store']);
-Route::middleware('auth')->get('api/categories', [CategoryController::class,'index']);
+Route::get('api/categories', [CategoryController::class,'index']);
+Route::get('api/vote/{resource}', VoteController::class);
