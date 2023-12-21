@@ -14,6 +14,9 @@ defineProps({
     status: {
         type: String,
     },
+    canRegister: {
+        type: Boolean,
+    },
 });
 
 const form = useForm({
@@ -75,8 +78,16 @@ const submit = () => {
                     <span class="ms-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
-
+            <div class="flex items-center justify-start mt-4">
+                <Link
+                    v-if="canRegister"
+                    :href="route('register')"
+                    class="justify-star underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >Register me</Link
+                >
+            </div>
             <div class="flex items-center justify-end mt-4">
+
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
