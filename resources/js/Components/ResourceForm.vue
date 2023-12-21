@@ -1,6 +1,7 @@
 <script setup >
 import { ref, onMounted} from "vue";
 import axios from "axios";
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 let categories = ref([]);
 let title = ref("");
@@ -37,14 +38,29 @@ function createResource(){
 <template>
     <div class="m-8">
         <!-- <p>{{ title }}</p> -->
-        <input type="text" v-model="title">
-        <input type="text" v-model="description">
-        <input type="text" v-model="link">
-        <select v-model="category_id">
+        <input 
+            type="text" 
+            placeholder="Título del recurso..." 
+            class="w-60 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+            v-model="title">
+        <input 
+            type="text" 
+            placeholder="Describa su recurso..." 
+            class="w-60 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+            v-model="description">
+        <input 
+            type="text"
+            placeholder="Enlace a su recurso..." 
+            class="w-60 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
+            v-model="link">
+        <select 
+            class="w-60 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
+            v-model="category_id">
             <option v-for="category in categories" :key="category.id" :value="category.id">
                 {{ category.name }}
             </option>
         </select>
-        <button @click="createResource">Ingresar recurso</button>
+        <!-- <button @click="createResource">Ingresar recurso</button> -->
+        <PrimaryButton @click="createResource" class="mt-4">Ingresar recurso</PrimaryButton>
     </div>
 </template>
